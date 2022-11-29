@@ -4,16 +4,24 @@ const {Op} = require('sequelize');
 
 const getUsers = async () => {
     const users = await User.findAll({
-        include: {
-            model: Role,
-            as: 'role'
-        }
+            /*include: [{
+                model: Role,
+                as: 'role',
+                attributes: ['name', 'description']
+            }],*/
+            attributes: ['firstName', 'lastName', 'email', 'createdAt']
     });
     return users;
 }
 
 const getUserById = async (id) => {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id,{
+        /*include: [{
+            model: Role,
+            as: 'role',
+            attributes: ['name', 'description']
+        }],*/
+    });
     return user;
 }
 
@@ -35,7 +43,7 @@ const createUser = async (user) => {
 const updateUser = async (id, user) => {
     const updatedUser = await User.update(user, {
         where: {
-            id_user: id
+            id: id
         }
     });
     return updatedUser;
@@ -44,7 +52,7 @@ const updateUser = async (id, user) => {
 const deleteUser = async (id) => {
     const deletedUser = await User.destroy({
         where: {
-            id_user: id
+            id: id
         }
     });
     return deletedUser;

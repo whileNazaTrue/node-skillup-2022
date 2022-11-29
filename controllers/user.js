@@ -12,7 +12,11 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const user = await userService.getUserById(req.params.id);
-        res.status(200).json(user);
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({error: 'User not found'});
+        }
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -39,7 +43,11 @@ const updateUser = async (req, res) => {
             res.status(500).json({error: "No data was provided"});
         }else{
             const user = await userService.updateUser(req.params.id, req.body);
-            res.status(200).json(user);
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({error: 'User not found'});
+            }
         }
     } catch (err) {
         res.status(500).json({error: err.message});
@@ -49,7 +57,11 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const user = await userService.deleteUser(req.params.id);
-        res.status(200).json(user);
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({error: 'User not found'});
+        }
     } catch (err) {
         res.status(500).json({error: err.message});
     }
