@@ -5,15 +5,15 @@ const encode = (payload) => {
 };
 
 const decode = (req, res, next) => {
-    const { token } = req.body;
+    const token = req.headers["authorization"]
 
-    req.body.decodeToken = jwt.decode(token, { complete: true });
+    req.body.decodedToken = jwt.decode(token, { complete: true });
 
     next();
 };
 
 const verify = (req, res, next) => {
-    const { token } = req.body;
+    const token = req.headers["authorization"]
 
     jwt.verify(token, "secretcode", (err, payload) => {
         //if there is not token or does not match
