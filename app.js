@@ -27,6 +27,8 @@ const transactionRouter = require('./routes/transaction.js')
 //
 app.use('/', indexRouter)
 app.use('/api/users', userRouter)
+app.use('/api/transactions', transactionRouter)
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
