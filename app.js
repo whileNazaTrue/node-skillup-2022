@@ -36,7 +36,7 @@ const categoryRouter = require('./routes/category.js')
 const transactionRouter = require('./routes/transaction.js')
 
 //
-app.use('/', indexRouter)
+app.use('/api', indexRouter)
 app.use('/api/users', userRouter)
 app.use('/api/categories', categoryRouter)
 app.use('/api/transactions', transactionRouter)
