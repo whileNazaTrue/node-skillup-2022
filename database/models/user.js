@@ -53,8 +53,8 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
   }
 
-  User.prototype.comparePassword = (password) => {
-    return bcrypt.compareSync(password, this.password) 
+  User.prototype.comparePassword = async function(password){
+    return await bcrypt.compare(password, this.password) 
   }
 
   return User;
