@@ -1,6 +1,5 @@
 const {User} = require('../database/models');
 const {Role} = require('../database/models');
-const {Op} = require('sequelize');
 
 const getUsers = async () => {
     const users = await User.findAll({

@@ -1,25 +1,33 @@
 const {Transaction} = require('../database/models');
-const {Op} = require('sequelize');
+const {Category} = require('../database/models');
+const {User} = require('../database/models');
 
 const getTransactions = async () => {
     const transactions = await Transaction.findAll({
-            /*include: [{
-                model: Role,
-                as: 'role',
+            include: [{
+                model: Category,
+                as: 'category',
                 attributes: ['name', 'description']
-            }],*/
-            //attributes: ['firstName', 'lastName', 'email', 'createdAt']
+            }, {
+                model: User,
+                as: 'user',
+                attributes: ['firstName', 'lastName', 'email']
+            }]
     });
     return transactions;
 }
 
 const getTransactionById = async (id) => {
     const transaction = await Transaction.findByPk(id,{
-        /*include: [{
-            model: Role,
-            as: 'role',
+        include: [{
+            model: Category,
+            as: 'category',
             attributes: ['name', 'description']
-        }],*/
+        }, {
+            model: User,
+            as: 'user',
+            attributes: ['firstName', 'lastName', 'email']
+        }]
     });
     return transaction;
 }
