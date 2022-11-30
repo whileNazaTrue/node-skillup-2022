@@ -1,9 +1,19 @@
-const express = require('express')
-const { get } = require('../controllers/index')
+const express = require('express');
+const fs = require('fs');
+const router = express.Router();
 
-const router = express.Router()
+const PATH_ROUTES = __dirname;
 
-// example of a route with index controller get function
-router.get('/', get)
+const removeExtension = (fileName) => {
+    return fileName.split('.').shift();
+};
 
-module.exports = router
+fs.readdirSync(PATH_ROUTES).filter((file) => {
+    const name = removeExtension(file);
+
+    if (name !== 'index'){
+        router.use(`/${name}s`, require(`./${file}`));
+    };
+});
+
+module.exports = router;

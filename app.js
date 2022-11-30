@@ -25,10 +25,11 @@ const categoryRouter = require('./routes/category.js')
 const transactionRouter = require('./routes/transaction.js')
 
 //
-app.use('/', indexRouter)
+/* app.use('/', indexRouter)
 app.use('/api/users', userRouter)
 app.use('/api/categories', categoryRouter)
-app.use('/api/transactions', transactionRouter)
+app.use('/api/transactions', transactionRouter) */
+app.use('/api', require('./routes'));
 
 
 // catch 404 and forward to error handler
