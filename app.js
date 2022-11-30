@@ -19,10 +19,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-//
-const userRouter = require('./routes/user.js')
-const categoryRouter = require('./routes/category.js')
-const transactionRouter = require('./routes/transaction.js')
 
 
 app.use('/api', require('./routes'));
