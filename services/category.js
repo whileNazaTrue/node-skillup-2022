@@ -25,10 +25,20 @@ const updateCategory = async (id, category) => {
     return updatedCategory;
 }
 
+const deleteCategory = async (id) => {
+    const deletedCategory = await Category.destroy({
+        where: {
+            id: id
+        }
+    });
+    return deletedCategory;
+}
+
 module.exports = {
     getCategories,
     getCategoryById,
     createCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 };
 
