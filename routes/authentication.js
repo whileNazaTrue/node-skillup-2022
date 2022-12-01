@@ -2,7 +2,6 @@ const { Router } = require("express");
 const passport = require("passport");
 const router = Router();
 
-const userController = require("../controllers/user.js");
 
 router.post("/signup", (req, res, next) => {
     passport.authenticate("local-signup", (err, user, info) => {
@@ -10,8 +9,8 @@ router.post("/signup", (req, res, next) => {
         if (err) return next(err);
         if (!user)
             return res
-                .status(403)
-                .json({ success: false, message: "authentication failed" });
+                .status(400)
+                .json({ success: false, message: "user creation failed" });
 
         return res
             .status(200)
@@ -30,7 +29,6 @@ router.post("/signin", (req, res, next) => {
 
         req.login(user, (loginError) => {
             if (loginError) return next(loginError);
-
             return res
                 .status(200)
                 .json({ success: true, message: "authentication successful" });
