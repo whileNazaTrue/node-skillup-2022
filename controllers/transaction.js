@@ -45,7 +45,8 @@ const updateTransaction = async (req, res) => {
         }else{
             const transaction = await transactionService.updateTransaction(req.params.id, req.body);
             if (transaction) {
-                res.status(200).json(transaction);
+                const updatedTransaction = await transactionService.getTransactionById(req.params.id);
+                res.status(200).json(updatedTransaction);
             } else {
                 res.status(404).json({error: 'Transaction not found'});
             }
@@ -59,7 +60,7 @@ const deleteTransaction = async (req, res) => {
     try {
         const transaction = await transactionService.deleteTransaction(req.params.id);
         if (transaction) {
-            res.status(200).json(transaction);
+            res.status(200).json({transaction: 'Transaction deleted'});
         } else {
             res.status(404).json({error: 'Transaction not found'});
         }

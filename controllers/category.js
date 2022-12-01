@@ -1,4 +1,5 @@
 const categoryService = require('../services/category');
+const { getTransactionById } = require('./transaction');
 
 const getCategories = async (req, res) => {
     try {
@@ -39,7 +40,8 @@ const updateCategory = async (req, res) => {
         }else{
             const category = await categoryService.updateCategory(req.params.id, req.body);
             if (category) {
-                res.status(200).json(category);
+                const updatedCategory = await categoryService.getCategoryById(req.params.id);
+                res.status(200).json(updatedCategory);
             } else {
                 res.status(404).json({error: 'Category not found'});
             }
@@ -53,7 +55,7 @@ const deleteCategory = async (req, res) => {
     try {
         const category = await categoryService.deleteCategory(req.params.id);
         if (category) {
-            res.status(200).json(category);
+            res.status(200).json({message: 'Category deleted'});
         } else {
             res.status(404).json({error: 'Category not found'});
         }
