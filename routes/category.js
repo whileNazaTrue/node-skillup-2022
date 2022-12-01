@@ -8,5 +8,6 @@ router
     .get('/:id', categoryController.getCategoryById)
     .post('/', categoryController.createCategory)
     .put('/:id', categoryController.updateCategory)
+    .delete('/:id', categoryController.deleteCategory)
 
 module.exports = router
