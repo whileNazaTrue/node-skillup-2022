@@ -3,8 +3,13 @@ const transactionService = require('../services/transaction.js');
 
 const getTransactions = async (req, res) => {
     try {
-        const transactions = await transactionService.getTransactions();
-        res.status(200).json(transactions);
+        if(req.query){
+            const transactions = await transactionService.getTrensactionsByUser(req.query.id);
+            res.status(200).json(transactions);
+        } else{
+            const transactions = await transactionService.getTransactions();
+            res.status(200).json(transactions);
+        }
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -40,7 +45,8 @@ const updateTransaction = async (req, res) => {
         }else{
             const transaction = await transactionService.updateTransaction(req.params.id, req.body);
             if (transaction) {
-                res.status(200).json(transaction);
+                const updatedTransaction = await transactionService.getTransactionById(req.params.id);
+                res.status(200).json(updatedTransaction);
             } else {
                 res.status(404).json({error: 'Transaction not found'});
             }
@@ -54,7 +60,7 @@ const deleteTransaction = async (req, res) => {
     try {
         const transaction = await transactionService.deleteTransaction(req.params.id);
         if (transaction) {
-            res.status(200).json(transaction);
+            res.status(200).json({transaction: 'Transaction deleted'});
         } else {
             res.status(404).json({error: 'Transaction not found'});
         }

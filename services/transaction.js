@@ -17,6 +17,14 @@ const getTransactions = async () => {
     return transactions;
 }
 
+const getTrensactionsByUser = async (userId) => {
+    const transactions = await Transaction.findAll({
+        where: {userId}
+    })
+
+    return transactions;
+}
+
 const getTransactionById = async (id) => {
     const transaction = await Transaction.findByPk(id,{
         include: [{
@@ -58,4 +66,4 @@ const deleteTransaction = async (id) => {
 
 
 
-module.exports = {getTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction};
+module.exports = {getTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction, getTrensactionsByUser};
