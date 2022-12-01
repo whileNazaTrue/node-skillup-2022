@@ -49,11 +49,25 @@ const updateCategory = async (req, res) => {
     }
 }
 
+const deleteCategory = async (req, res) => {
+    try {
+        const category = await categoryService.deleteCategory(req.params.id);
+        if (category) {
+            res.status(200).json(category);
+        } else {
+            res.status(404).json({error: 'Category not found'});
+        }
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+}
+
 
 
 module.exports = {
     getCategories,
     getCategoryById,
     createCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 };
