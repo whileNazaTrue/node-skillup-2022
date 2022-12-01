@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'role',
         foreignKey: 'roleId'
       });
+      User.hasMany(models.Transaction, {
+        as: 'transactions',
+        foreignKey: 'userId'
+      });
     }
   };
   User.init({
@@ -39,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     roleId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     sequelize,

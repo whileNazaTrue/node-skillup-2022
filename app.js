@@ -19,12 +19,10 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-//
-const userRouter = require('./routes/user.js')
 
-//
-app.use('/', indexRouter)
-app.use('/api/users', userRouter)
+
+app.use('/api', require('./routes'));
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
