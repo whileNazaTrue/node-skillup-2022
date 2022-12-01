@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = Router()
 
 const userController = require('../controllers/user.js');
+const { signinValidation, signupValidation } = require('../validators/auth.js');
 
 // router.post('/login', (req, res) => {
 //     const { email, password } = req.body
@@ -10,7 +11,7 @@ const userController = require('../controllers/user.js');
 
 // })
 
-router.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', signupValidation, passport.authenticate('local-signup', {
     successMessage: 'success',
     failureMessage: 'failure',
     passReqToCallback: true
@@ -18,7 +19,7 @@ router.post('/signup', passport.authenticate('local-signup', {
     res.json('ok')
 })
 
-router.post('/signin', passport.authenticate('local-signin', {
+router.post('/signin', signinValidation, passport.authenticate('local-signin', {
     successMessage: 'success',
     failureMessage: 'failure',
     passReqToCallback: true
