@@ -19,8 +19,12 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback: true
 }, async (req, email, password, done) => {
     const user = new User()
+    user.firstName = req.body.firstName
+    user.lastName = req.body.lastName
     user.email = email
     user.password = user.encryptPassword(password)
+    user.avatar = req.body.avatar
+    user.roleId = req.body.roleId
     await user.save()
     done(null, user)
 }))
@@ -32,9 +36,8 @@ passport.use('local-signin', new LocalStrategy({
 }, async (req, email, password, done) => {
 
     const user = await userService.getUserByEmail(email)
-    console.log(user);
-    if(!user) return done(null, false, console.log('no se encontro'))
-    if(!user.comparePassword(password)) return done(null, false, console.log('contrasena incorrecta'))
+    if(!user) return done(null, false, { message: 'user not found' })
+    if(!user.comparePassword(password)) return done(null, false, { message: 'password is incorrect'})
 
     done(null, user)
 }))
