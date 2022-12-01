@@ -108,7 +108,7 @@ describe('Users', () => {
         chai.request(url)
         .delete('/users/5')
         .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(204);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('message').to.be.an('string');
             done();

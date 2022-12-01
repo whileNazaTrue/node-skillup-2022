@@ -2,14 +2,14 @@ const transaction = require('../database/models/transaction.js');
 const transactionService = require('../services/transaction.js');
 
 const getTransactions = async (req, res) => {
-    try {
+    try {/*
         if(req.query){
             const transactions = await transactionService.getTrensactionsByUser(req.query.id);
             res.status(200).json(transactions);
-        } else{
+        } else{*/
             const transactions = await transactionService.getTransactions();
             res.status(200).json(transactions);
-        }
+        //}
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -27,6 +27,20 @@ const getTransactionById = async (req, res) => {
         res.status(500).json({error: err.message});
     }
 }
+
+const getTransactionsByUserId = async (req, res) => {
+    try {
+        const transactions = await transactionService.getTransactionsByUserId(req.params.id);
+        if (transactions) {
+            res.status(200).json(transactions);
+        } else {
+            res.status(404).json({error: 'Transactions not found'});
+        }
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+}
+
 
 const createTransaction = async (req, res) => {
     try {
@@ -60,7 +74,7 @@ const deleteTransaction = async (req, res) => {
     try {
         const transaction = await transactionService.deleteTransaction(req.params.id);
         if (transaction) {
-            res.status(200).json({transaction: 'Transaction deleted'});
+            res.status(204).json({transaction: 'Transaction deleted'});
         } else {
             res.status(404).json({error: 'Transaction not found'});
         }
@@ -69,5 +83,5 @@ const deleteTransaction = async (req, res) => {
     }
 }
 
-module.exports = {getTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction};
+module.exports = {getTransactions, getTransactionById, getTransactionsByUserId, createTransaction, updateTransaction, deleteTransaction};
 
