@@ -10,7 +10,7 @@ const url = 'http://localhost:3000/api';
 const user = {
     firstName: 'Test',
     lastName: 'Test',
-    email: 't@gmail.com',
+    email: 'tss@gmail.com',
     password: '123456',
     avatar: 'https://www.google.com',
     roleId: 1
@@ -19,16 +19,17 @@ const user = {
 const user2 = {
     firstName: 'Test2',
     lastName: 4,
-    email: 'wa@gmail.com',
+    email: 'taass@gmail.com',
     password: '123456',
     avatar: 'https://www.google.com',
     roleId: 1
+
 };
 
 const user3 = {
     firstName: 'Test3',
     lastName: 'Test3',
-    email: 'aa@gmail.com',
+    email: 'tata@gmail.com',
     password: '123456',
     avatar: 'https://www.google.com',
     roleId: 1
@@ -36,6 +37,7 @@ const user3 = {
 
 
 describe('Users', () => {
+    
     it('should return a list of users', (done) => {
         chai.request(url)
         .get('/users')
@@ -70,10 +72,11 @@ describe('Users', () => {
             done();
         });
     });
+    
 
     it('should update a user', (done) => {
         chai.request(url)
-        .put('/users/1')
+        .put('/users/3')
         .send(user2)
         .end((err, res) => {
             expect(res).to.have.status(200);
@@ -88,7 +91,7 @@ describe('Users', () => {
 
     it('should update a user', (done) => {
         chai.request(url)
-        .put('/users/1')
+        .put('/users/3')
         .send(user3)
         .end((err, res) => {
             expect(res).to.have.status(200);
@@ -103,7 +106,7 @@ describe('Users', () => {
 
     it('should delete a user', (done) => {
         chai.request(url)
-        .delete('/users/1')
+        .delete('/users/5')
         .end((err, res) => {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('object');
