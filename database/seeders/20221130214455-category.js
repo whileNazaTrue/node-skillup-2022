@@ -1,35 +1,13 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('categories', [{
-      name: 'Various',
-      description: "Transactions that don't fit in a special category",
+      name: 'Income',
+      description: "Transactions from sending money to other users",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      name: 'Rental',
-      description: 'Rent, mortgage, and related payments',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Invoice',
-      description: 'Payments for goods and services',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Salary',
-      description: 'Payments to employees',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Insurance',
-      description: 'Payments for insurance/healthcare',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Capital contribution',
-      description: 'Payments for capital contributions for a business',
+      name: 'Outcome',
+      description: "Transactions from receiving money from other users",
       createdAt: new Date(),
       updatedAt: new Date()
     }],
