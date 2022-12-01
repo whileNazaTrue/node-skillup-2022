@@ -22,7 +22,7 @@ const isUser = (req, res, next) => {
             .status(401)
             .json({ error: "error occurred while trying to verify token" });
 
-    if (user.rolesId >= 0) return next();
+    if (user.rolesId <= 2) return next();
 
     return res.status(403).json({ error: "not authorized" });
 };
@@ -55,4 +55,6 @@ module.exports = {
     verify,
     encode,
     decode,
+    isUser,
+    isAdmin
 };
