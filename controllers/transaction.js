@@ -2,9 +2,14 @@ const transaction = require('../database/models/transaction.js');
 const transactionService = require('../services/transaction.js');
 
 const getTransactions = async (req, res) => {
-    try {
-        const transactions = await transactionService.getTransactions();
-        res.status(200).json(transactions);
+    try {/*
+        if(req.query){
+            const transactions = await transactionService.getTrensactionsByUser(req.query.id);
+            res.status(200).json(transactions);
+        } else{*/
+            const transactions = await transactionService.getTransactions();
+            res.status(200).json(transactions);
+        //}
     } catch (err) {
         res.status(500).json({error: err.message});
     }
