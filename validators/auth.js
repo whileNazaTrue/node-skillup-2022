@@ -1,7 +1,7 @@
 const { check } = require("express-validator");
 const { validateResult } = require("../helpers/validate");
 
-const loginValidation = (req, res, next) => [
+const signinValidation = [
     check("email").exists().isEmail().normalizeEmail().not().isEmpty(),
     check("password").exists().not().isEmpty(),
     (req, res, next) => {
@@ -9,8 +9,8 @@ const loginValidation = (req, res, next) => [
     },
 ];
 
-const registerValidation = (req, res, next) => [
-    check('fisrtName').exists().not().isEmpty(),
+const signupValidation = [
+    check('firstName').exists().not().isEmpty(),
     check('lastName').exists().not().isEmpty(),
     check("email").exists().isEmail().normalizeEmail().not().isEmpty(),
     check("password").exists().isLength({min: 5}).not().isEmpty(),
@@ -22,6 +22,6 @@ const registerValidation = (req, res, next) => [
 ]
 
 module.exports = {
-    loginValidation,
-    registerValidation
+    signinValidation,
+    signupValidation
 };
