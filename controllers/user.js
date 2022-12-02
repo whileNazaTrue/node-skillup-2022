@@ -2,8 +2,13 @@ const userService = require('../services/user.js');
 
 const getUsers = async (req, res) => {
     try {
-        const users = await userService.getUsers();
-        res.status(200).json(users);
+        const { page } = req.query;
+
+        const {count, rows} = await userService.getUsers(page);
+        res.status(200).json({
+            total: count,
+            users: rows
+        });
     } catch (err) {
         res.status(500).json({error: err.message});
     }
