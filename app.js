@@ -13,8 +13,7 @@ const indexRouter = require('./routes/index')
 const port = process.env.PORT || 3000
 
 const app = express()
-require('./auth/local-auth')
-
+require('./auth/passportConfig')
 app.use(cors())
 
 app.use(logger('dev'))
