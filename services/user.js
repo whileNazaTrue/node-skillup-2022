@@ -1,16 +1,18 @@
 const {User} = require('../database/models');
 const {Role} = require('../database/models');
 
-const getUsers = async () => {
-    const users = await User.findAll({
+const getUsers = async (page) => {
+    const {count, rows} = await User.findAndCountAll({
             /*include: [{
                 model: Role,
                 as: 'role',
                 attributes: ['name', 'description']
             }],*/
-            attributes: ['firstName', 'lastName', 'email', 'createdAt']
+            attributes: ['firstName', 'lastName', 'email', 'createdAt'],
+            limit: 10,
+            offset: +page * 10
     });
-    return users;
+    return {count, rows};
 }
 
 const getUserById = async (id) => {
