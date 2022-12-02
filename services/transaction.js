@@ -2,27 +2,37 @@ const {Transaction} = require('../database/models');
 const {Category} = require('../database/models');
 const {User} = require('../database/models');
 
-const getTransactions = async () => {
-    const transactions = await Transaction.findAll({
-            include: [{
-                model: Category,
-                as: 'category',
-                attributes: ['name', 'description']
-            }, {
-                model: User,
-                as: 'user',
-                attributes: ['firstName', 'lastName', 'email']
-            }]
+const getTransactions = async (page) => {
+    const {count, rows} = await Transaction.findAndCountAll({
+        include: [{
+            model: Category,
+            as: 'category',
+            attributes: ['name', 'description']
+        }, {
+            model: User,
+            as: 'user',
+            attributes: ['firstName', 'lastName', 'email']
+        }],
+        limit: 10,
+        offset: +page * 10
     });
-    return transactions;
+
+    return {count, rows};
 }
 
-const getTrensactionsByUser = async (userId) => {
-    const transactions = await Transaction.findAll({
-        where: {userId}
-    })
+const getTrensactionsByUser = async (userId, page) => {
+    const {count, rows} = await Transaction.findAndCountAll({
+        where: {userId},
+        include: {
+            model: Category,
+            as: 'category',
+            attributes: ['name', 'description']
+        },
+        limit: 10,
+        offset: +page * 10
+    });
 
-    return transactions;
+    return {count, rows};
 }
 
 const getTransactionById = async (id) => {
