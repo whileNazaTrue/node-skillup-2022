@@ -4,11 +4,19 @@ const getUsers = async (req, res) => {
     try {
         const { page } = req.query;
 
-        const {count, rows} = await userService.getUsers(page);
-        res.status(200).json({
-            total: count,
-            users: rows
-        });
+        const {count, rows, flag, previous, next} = await userService.getUsers(page);
+        if (flag) {
+            res.status(200).json({
+                total: count,
+                transactions: rows,
+                previous,
+                next
+            });
+        } else {
+            res.status(404).json({
+                message: 'No users found for this page'
+            });
+        }
     } catch (err) {
         res.status(500).json({error: err.message});
     }
