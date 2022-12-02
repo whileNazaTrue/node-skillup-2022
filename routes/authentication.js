@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const passport = require("passport");
 const router = Router();
+const jwt = require('../middlewares/jwt');
 
 
 router.post("/signup", (req, res, next) => {
-    passport.authenticate("local-signup", (err, user, info) => {
+    passport.authenticate("local-signup", {session: false}, (err, user, info) => {
         //internal error
         if (err) return next(err);
         if (!user)
@@ -27,11 +28,12 @@ router.post("/signin", (req, res, next) => {
                 .status(403)
                 .json({ success: false, message: "authentication failed" });
 
-        req.login(user, (loginError) => {
+        req.login(user, {session: false}, (loginError) => {
             if (loginError) return next(loginError);
+            const token = jwt.encode(user.dataValues)
             return res
                 .status(200)
-                .json({ success: true, message: "authentication successful" });
+                .json({ success: true, message: "authentication successful", token });
         });
     })(req, res, next);
 });
