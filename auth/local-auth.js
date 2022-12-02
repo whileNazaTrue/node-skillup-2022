@@ -1,5 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
 const userService = require('../services/user.js');
 const bcrypt = require('bcrypt');
 const { User } = require('../database/models');
@@ -32,8 +34,7 @@ passport.use('local-signup', new LocalStrategy({
 passport.use('local-signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true
-}, async (req, email, password, done) => {
+}, async (email, password, done) => {
 
     const user = await userService.getUserByEmail(email)
     if(!user) return done(null, false, { message: 'user not found' })
@@ -41,3 +42,14 @@ passport.use('local-signin', new LocalStrategy({
 
     done(null, user)
 }))
+
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secretcode';
+passport.use('jwt', new JwtStrategy(opts, async function (jwt_payload, done) {
+    const user = await userService.getUserByEmail(jwt_payload.email)
+
+    if(!user) return done(null, false, { message: 'user not found' })
+
+    return done(null, user)
+}));
