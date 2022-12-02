@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
     try {
         const u = await userService.getUserByEmail(req.body.email);
         if (u) {
-            res.status(400).json({error: 'El email ya existe'});
+            res.status(403).json({error: 'El email ya existe'});
         } else {
             user = await userService.createUser(req.body);
             res.status(201).json(user);
@@ -44,7 +44,8 @@ const updateUser = async (req, res) => {
         }else{
             const user = await userService.updateUser(req.params.id, req.body);
             if (user) {
-                res.status(200).json(user);
+                const updated = await userService.getUserById(req.params.id);
+                res.status(200).json(updated);
             } else {
                 res.status(404).json({error: 'User not found'});
             }
@@ -58,7 +59,7 @@ const deleteUser = async (req, res) => {
     try {
         const user = await userService.deleteUser(req.params.id);
         if (user) {
-            res.status(200).json(user);
+            res.status(204).json({message: 'User deleted'});
         } else {
             res.status(404).json({error: 'User not found'});
         }
