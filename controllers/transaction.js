@@ -4,21 +4,40 @@ const transactionService = require('../services/transaction.js');
 const getTransactions = async (req, res) => {
     try {
         const { page } = req.query;
-
+        let validatedPage = page;
+        if (validatedPage < 0) {
+            validatedPage = 0;
+        }
         if(req.query.userId){
-            const {count, rows} = await transactionService.getTrensactionsByUser(req.query.userId, page);
-            res.status(200).json({
-                total: count,
-                transactions: rows
-            });
-        } else{
-            const {count, rows} = await transactionService.getTransactions(page);
+            if (!rows || rows.length === 0) {
+                res.status(404).json({
+                    message: 'No transactions found for this page'
+                });
+            } else {
+            const {count, rows} = await transactionService.getTrensactionsByUser(req.query.userId, validatedPage);
             res.status(200).json({
                 total: count,
                 transactions: rows,
-                /* next: `http://localhost:3000/api/transactions?page=${+page+1}`,
-                previous: `http://localhost:3000/api/transactions?page=${+page-1}` */
+                previous: validatedPage == 0 ? null : `http://localhost:3000/api/transactions?page=${+validatedPage-1}` ,
+                next:  rows.length < 10 || +validatedPage+1 == maxPage ? null :`http://localhost:3000/api/transactions?page=${+validatedPage+1}`
             });
+        }
+        } else{
+            const {count, rows} = await transactionService.getTransactions(validatedPage);
+            if (!rows || rows.length === 0) {
+                res.status(404).json({
+                    message: 'No transactions found for this page'
+                });
+            } else {
+            const maxPage = +count / (10) 
+            res.status(200).json({
+                total: count,
+                transactions: rows,
+                previous: validatedPage == 0 ? null : `http://localhost:3000/api/transactions?page=${+validatedPage-1}` ,
+                next:  rows.length < 10 || +validatedPage+1 == maxPage ? null :`http://localhost:3000/api/transactions?page=${+validatedPage+1}`
+
+            });
+            }
         }
     } catch (err) {
         res.status(500).json({error: err.message});
