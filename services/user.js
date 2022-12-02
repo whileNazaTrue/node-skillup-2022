@@ -2,6 +2,14 @@ const {User} = require('../database/models');
 const {Role} = require('../database/models');
 
 const getUsers = async (page) => {
+    let flag = true;
+    let previous, next;
+
+    let validatedPage = +page;
+    if (validatedPage < 0) {
+        validatedPage = 0;
+    }
+
     const {count, rows} = await User.findAndCountAll({
             /*include: [{
                 model: Role,
@@ -10,9 +18,18 @@ const getUsers = async (page) => {
             }],*/
             attributes: ['firstName', 'lastName', 'email', 'createdAt'],
             limit: 10,
-            offset: +page * 10
+            offset: validatedPage * 10
     });
-    return {count, rows};
+    
+    if (!rows || rows.length === 0) {
+        flag = false;
+    }
+
+    const maxPage = +count / (10) 
+    previous = validatedPage == 0 ? null : `http://localhost:3000/api/users?page=${validatedPage-1}`;
+    next = rows.length < 10 || validatedPage+1 == maxPage ? null :`http://localhost:3000/api/users?page=${validatedPage+1}`;
+
+    return {count, rows, flag, previous, next};
 }
 
 const getUserById = async (id) => {
