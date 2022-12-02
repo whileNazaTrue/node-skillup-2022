@@ -44,6 +44,10 @@ const transactionValidation = [
                 errorMessage: "the amount field cannot be emmpty",
                 bail: true,
             },
+            isInt: {
+                errorMessage: "the amount must be a number",
+                bail: true,
+            },
         },
         date: {
             in: ["body"],
