@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const passport = require("passport");
 const router = Router();
-const jwt = require('../middlewares/jwt');
+const jwtMiddleware = require('../middlewares/jwt');
 
 
 router.post("/signup", (req, res, next) => {
@@ -30,7 +30,7 @@ router.post("/signin", (req, res, next) => {
 
         req.login(user, {session: false}, (loginError) => {
             if (loginError) return next(loginError);
-            const token = jwt.encode(user.dataValues)
+            const token = jwtMiddleware.encode(user.dataValues)
             return res
                 .status(200)
                 .json({ success: true, message: "authentication successful", token });

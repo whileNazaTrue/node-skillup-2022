@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const encode = (payload) => {
-    return jwt.sign(payload, "secretcode", { expiresIn: "24h" });
+    return 'Bearer ' + jwt.sign(payload, "secretcode", { expiresIn: "24h" });
 };
 
 const decode = (req, res, next) => {
