@@ -1,5 +1,6 @@
 'use strict';
 const {Model} = require('sequelize');
+const bcrypt = require('bcrypt')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -55,5 +56,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     paranoid: true
   });
+
+  User.prototype.encryptPassword = (password) => {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+  }
+
+  User.prototype.comparePassword = async function(password){
+    return await bcrypt.compare(password, this.password) 
+  }
+
   return User;
 };

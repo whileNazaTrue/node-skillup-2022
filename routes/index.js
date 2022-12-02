@@ -8,6 +8,10 @@ const removeExtension = (fileName) => {
     return fileName.split('.').shift();
 };
 
+const auth = require('./authentication')
+router.use('/auth', auth)
+
+
 fs.readdirSync(PATH_ROUTES).filter((file) => {
     const name = removeExtension(file);
     if (name !== 'index' && name !== 'category'){
