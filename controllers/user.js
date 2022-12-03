@@ -8,7 +8,7 @@ const getUsers = async (req, res) => {
         if (flag) {
             res.status(200).json({
                 total: count,
-                transactions: rows,
+                users: rows,
                 previous,
                 next
             });
