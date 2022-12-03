@@ -30,8 +30,8 @@ const getTransactions = async (page) => {
     }
 
     const maxPage = +count / (10) 
-    previous = validatedPage == 0 ? null : `http://localhost:3000/api/transactions?page=${validatedPage-1}`;
-    next = rows.length < 10 || validatedPage+1 == maxPage ? null :`http://localhost:3000/api/transactions?page=${validatedPage+1}`;
+    previous = validatedPage == 0 ? null : (process.env.HOST + ""+ process.env.PORT)+ `/api/transactions?page=${validatedPage-1}`;
+    next = rows.length < 10 || validatedPage+1 == maxPage ? null :(process.env.HOST + ""+ process.env.PORT)+ `/api/transactions?page=${validatedPage+1}`;
 
     return {count, rows, flag, previous, next};
 }
