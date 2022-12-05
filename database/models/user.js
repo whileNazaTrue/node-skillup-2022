@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'transactions',
         foreignKey: 'userId'
       });
+      User.belongsTo(models.Avatar, {
+        as: 'avatar',
+        foreignKey: 'avatarId'
+      });
     }
   };
   User.init({
@@ -37,8 +41,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    avatar: {
-      type: DataTypes.STRING,
+    avatarId: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     roleId: {
