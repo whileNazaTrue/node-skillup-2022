@@ -20,13 +20,17 @@ passport.use('local-signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
+
+    const existingUser = await userService.getUserByEmail(email)
+
+    if(existingUser) return done(null, false,'the email already exists')
+
     const user = new User()
     user.firstName = req.body.firstName
     user.lastName = req.body.lastName
     user.email = email
     user.password = user.encryptPassword(password)
-    user.avatar = req.body.avatar
-    user.roleId = req.body.roleId
+    user.avatarId = req.body.avatarId
     await user.save()
     done(null, user)
 }))
@@ -37,8 +41,8 @@ passport.use('local-signin', new LocalStrategy({
 }, async (email, password, done) => {
 
     const user = await userService.getUserByEmail(email)
-    if(!user) return done(null, false, { message: 'user not found' })
-    if(!user.comparePassword(password)) return done(null, false, { message: 'password is incorrect'})
+    if(!user) return done(null, false, 'user not found' )
+    if(!user.comparePassword(password)) return done(null, false, 'password is incorrect')
 
     done(null, user)
 }))
@@ -49,7 +53,7 @@ opts.secretOrKey = 'secretcode';
 passport.use('jwt', new JwtStrategy(opts, async function (jwt_payload, done) {
     const user = await userService.getUserByEmail(jwt_payload.email)
 
-    if(!user) return done(null, false, { message: 'user not found' })
+    if(!user) return done(null, false, 'user not found')
 
     return done(null, user)
 }));

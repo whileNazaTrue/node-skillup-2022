@@ -49,6 +49,15 @@ const transactionValidation = [
                 bail: true,
             },
         },
+        description: {
+            in: ["body"],
+            optional: true,
+            notEmpty: {
+                errorMessage: "the description cannot be empty",
+                bail: true
+            },
+            escape: true,
+        },
         date: {
             in: ["body"],
             exists: {

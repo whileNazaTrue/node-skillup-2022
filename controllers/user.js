@@ -1,3 +1,4 @@
+const passport = require('passport');
 const userService = require('../services/user.js');
 
 const getUsers = async (req, res) => {
@@ -35,18 +36,19 @@ const getUserById = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
-    try {
-        const u = await userService.getUserByEmail(req.body.email);
-        if (u) {
-            res.status(403).json({error: 'El email ya existe'});
-        } else {
-            user = await userService.createUser(req.body);
-            res.status(201).json(user);
-        }
-    } catch (err) {
-        res.status(500).json({error: err.message});
-    }
+const createUser = (req, res, next) => {
+    passport.authenticate("local-signup", {session: false}, (err, user, message) => {
+        //internal error
+        if (err) return next(err);
+        if (message)
+            return res
+                .status(403)
+                .json({ success: false, message});
+
+        return res
+            .status(200)
+            .json({ success: true, message: "user created successfully" });
+    })(req, res, next)
 }
 //role id placeholder for later
 const updateUser = async (req, res) => {

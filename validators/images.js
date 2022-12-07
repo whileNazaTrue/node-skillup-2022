@@ -4,7 +4,7 @@ const path = require("path");
 
 const validateImageExtension = [
     checkSchema({
-        image: {
+        file: {
             in: ["body"],
             exists: {
                 errorMessage: "the file field is missing",
@@ -15,11 +15,11 @@ const validateImageExtension = [
                 bail: true,
             },
             custom: {
-                options: (value) => {
-                    const extension = path.extname(value).toLowerCase();
-                    const avalibleExtensions = [".png", ".jpg", ".svg", ".webp"];
+                options: (file) => {
+                    const extension = path.extname(file.originalname).toLowerCase();
+                    const supportedExtensions = [".png", ".jpg", ".svg", ".webp"];
 
-                    if (avalibleExtensions.includes(extension)) return Promise.resolve();
+                    if (supportedExtensions.includes(extension)) return Promise.resolve();
                     else return Promise.reject('The file extension is not supported');
                 },
                 bail: true
