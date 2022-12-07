@@ -7,9 +7,8 @@ router
     .get('/', categoryController.getCategories)
     .get('/:id', categoryController.getCategoryById)
 
-router.use(isAdmin)
-
 router
+    .use(isAdmin)
     .post('/', categoryController.createCategory)
     .put('/:id', categoryController.updateCategory)
     .delete('/:id', categoryController.deleteCategory)

@@ -9,8 +9,11 @@ const { isAdmin } = require('../middlewares/jwt.js');
 router.use(passport.authenticate('jwt'))
 
 router
-    .get('/', isAdmin, avatarController.getAvatars)
     .post('/', uploadAvatar.single('myfile'), validateImageExtension, avatarController.createAvatar)
+
+router
+    .use(isAdmin)
+    .get('/', avatarController.getAvatars)
     .get('/:id', avatarController.getAvatarById)
     .delete('/:id', avatarController.deleteAvatar);
 
