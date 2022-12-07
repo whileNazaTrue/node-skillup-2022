@@ -1,5 +1,5 @@
 const {User} = require('../database/models');
-const {Role} = require('../database/models');
+const {Avatar} = require('../database/models');
 
 const getUsers = async (page) => {
     let flag = true;
@@ -11,11 +11,11 @@ const getUsers = async (page) => {
     }
 
     const {count, rows} = await User.findAndCountAll({
-            /*include: [{
-                model: Role,
-                as: 'role',
-                attributes: ['name', 'description']
-            }],*/
+            include: [{
+                model: Avatar,
+                as: 'avatar',
+                attributes: ['url', 'filename']
+            }],
             attributes: ['firstName', 'lastName', 'email', 'createdAt'],
             limit: 10,
             offset: validatedPage * 10
