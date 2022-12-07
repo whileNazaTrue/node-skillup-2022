@@ -29,6 +29,7 @@ const createAvatar = async (req, res) => {
         const avatar = await avatarService.createAvatar(file); 
         res.status(200).json(avatar);
     } catch (err) {
+        console.log(err);
         res.status(500).json({error: err.message});
     }
 };
