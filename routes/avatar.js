@@ -3,7 +3,9 @@ const router = express.Router();
 const uploadAvatar = require('../helpers/avatar.js');
 const avatarController = require('../controllers/avatar.js');
 const { validateImageExtension } = require('../validators/images.js');
+const passport = require('passport');
 
+router.use(passport.authenticate('jwt'))
 
 router
     .get('/', avatarController.getAvatars)
