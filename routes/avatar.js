@@ -4,7 +4,7 @@ const uploadAvatar = require('../helpers/avatar.js');
 const avatarController = require('../controllers/avatar.js');
 const { validateImageExtension } = require('../validators/images.js');
 const passport = require('passport');
-const { isAdmin, isUser } = require('../middlewares/jwt.js');
+const { isAdmin } = require('../middlewares/jwt.js');
 
 router.use(passport.authenticate('jwt'))
 
