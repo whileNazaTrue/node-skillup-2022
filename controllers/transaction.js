@@ -3,38 +3,21 @@ const transactionService = require('../services/transaction.js');
 const getTransactions = async (req, res) => {
     try {
         const { page } = req.query;
+        const {count, rows, flag, previous, next} = await transactionService.getTransactions(page);
 
-        if(req.query.userId){
-            const {count, rows, flag, previous, next} = await transactionService.getTransactionsByUserId(req.query.userId, page);
-
-            if (flag) {
-                res.status(200).json({
-                    total: count,
-                    transactions: rows,
-                    previous,
-                    next
-                });
-            } else {
-                res.status(404).json({
-                    message: 'No transactions found for this page'
-                });
-            }
-        } else{
-            const {count, rows, flag, previous, next} = await transactionService.getTransactions(page);
-
-            if (flag) {
-                res.status(200).json({
-                    total: count,
-                    transactions: rows,
-                    previous,
-                    next
-                });
-            } else {
-                res.status(404).json({
-                    message: 'No transactions found for this page'
-                });
-            }
+        if (flag) {
+            res.status(200).json({
+                total: count,
+                transactions: rows,
+                previous,
+                next
+            });
+        } else {
+            res.status(404).json({
+                message: 'No transactions found for this page'
+            });
         }
+        
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -55,12 +38,20 @@ const getTransactionById = async (req, res) => {
 
 const getTransactionsByUserId = async (req, res) => {
     try {
-        const transactions = await transactionService.getTransactionsByUserId(req.params.id);
-        if (transactions) {
-            res.status(200).json(transactions);
-        } else {
-            res.status(404).json({error: 'Transactions not found'});
-        }
+        const {count, rows, flag, previous, next} = await transactionService.getTransactionsByUserId(req.params.userId, req.query.page);
+
+            if (flag) {
+                res.status(200).json({
+                    total: count,
+                    transactions: rows,
+                    previous,
+                    next
+                });
+            } else {
+                res.status(404).json({
+                    message: 'No transactions found for this page'
+                });
+            }
     } catch (err) {
         res.status(500).json({error: err.message});
     }
