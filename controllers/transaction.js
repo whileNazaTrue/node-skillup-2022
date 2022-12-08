@@ -5,7 +5,7 @@ const getTransactions = async (req, res) => {
         const { page } = req.query;
 
         if(req.query.userId){
-            const {count, rows, flag, previous, next} = await transactionService.getTrensactionsByUser(req.query.userId, page);
+            const {count, rows, flag, previous, next} = await transactionService.getTransactionsByUserId(req.query.userId, page);
 
             if (flag) {
                 res.status(200).json({
