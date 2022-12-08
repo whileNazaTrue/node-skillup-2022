@@ -9,7 +9,7 @@ const { transactionValidation } = require('../validators/transactions.js');
 router.use(passport.authenticate('jwt'))
 
 router
-    .get('/', isUser, transactionController.getTransactions)
+    .get('/', isAdmin, transactionController.getTransactions)
     .get('/:id', isAdmin, transactionController.getTransactionById)
     .get('/user/:id', isUser, transactionController.getTransactionsByUserId)
     .post('/', isUser, transactionValidation, transactionController.createTransaction)

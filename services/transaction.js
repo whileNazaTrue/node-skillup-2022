@@ -36,7 +36,7 @@ const getTransactions = async (page) => {
     return {count, rows, flag, previous, next};
 }
 
-const getTrensactionsByUser = async (userId, page) => {
+const getTransactionsByUserId = async (userId, page) => {
     let flag = true;
     let previous, next;
 
@@ -108,4 +108,4 @@ const deleteTransaction = async (id) => {
 
 
 
-module.exports = {getTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction, getTrensactionsByUser};
+module.exports = {getTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction, getTransactionsByUserId};
