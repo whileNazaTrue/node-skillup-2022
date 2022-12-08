@@ -87,7 +87,27 @@ const transactionValidation = [
     },
 ];
 
+const editTransactionValidation = [
+    checkSchema({
+        description: {
+            in: ["body"],
+            exists: {
+                errorMessage: "You must include a description",
+                bail: true,                
+            },
+            notEmpty: {
+                errorMessage: "the description cannot be empty",
+                bail: true
+            },
+            escape: true,
+        },
+    }),
+    (req, res, next) => {
+        validateResult(req, res, next);
+    },
+];
 
 module.exports = {
     transactionValidation,
+    editTransactionValidation
 }

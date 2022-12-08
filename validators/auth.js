@@ -130,7 +130,36 @@ const signupValidation = [
     },
 ];
 
+const editMailValidation = [
+    checkSchema({
+        email: {
+            in: ["body"],
+            exists: {
+                errorMessage: "the email is missing",
+                bail: true,
+            },
+            notEmpty: {
+                errorMessage: "the email cannot be empty",
+                bail: true,
+            },
+            isString: {
+                errorMessage: "the email must a string",
+                bail: true,
+            },
+            isEmail: {
+                errorMessage: "the email is invalid",
+                bail: true,
+            },
+            normalizeEmail: true,
+        },
+    }),
+    (req, res, next) => {
+        validateResult(req, res, next)
+    }
+]
+
 module.exports = {
     signinValidation,
     signupValidation,
+    editMailValidation
 };
