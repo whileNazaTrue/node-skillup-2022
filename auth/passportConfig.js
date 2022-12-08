@@ -42,7 +42,9 @@ passport.use('local-signin', new LocalStrategy({
 
     const user = await userService.getUserByEmail(email)
     if(!user) return done(null, false, 'user not found' )
-    if(!user.comparePassword(password)) return done(null, false, 'password is incorrect')
+    
+    const match = await user.comparePassword(password)
+    if(!match) return done(null, false, 'password is incorrect')
 
     done(null, user)
 }))
