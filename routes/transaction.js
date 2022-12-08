@@ -12,8 +12,8 @@ router
     .get('/', isUser, transactionController.getTransactions)
     .get('/:id', isAdmin, transactionController.getTransactionById)
     .get('/user/:id', isUser, transactionController.getTransactionsByUserId)
-    .post('/', transactionValidation, transactionController.createTransaction)
-    .put('/:id', transactionController.updateTransaction)
-    .delete('/:id', transactionController.deleteTransaction);
+    .post('/', isUser, transactionValidation, transactionController.createTransaction)
+    .put('/:id', isUser, transactionController.updateTransaction)
+    .delete('/:id', isUser, transactionController.deleteTransaction);
 
 module.exports = router;

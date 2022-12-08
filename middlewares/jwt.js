@@ -16,8 +16,12 @@ const decode = (req, res, next) => {
 
 const isUser = (req, res, next) => {
     const token = req.headers["authorization"];
-    const id = req.query.userId
-    
+    //for /transactions?id=
+    let id = req.query.userId
+    //for /user/:id
+
+    if(!id) id = req.params.id
+
     const user = verify(token);
 
     if(user instanceof Error)return res.status(401).json({ error: "error occurred while trying to verify token" });
