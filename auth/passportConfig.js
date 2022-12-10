@@ -5,6 +5,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const userService = require('../services/user.js');
 const bcrypt = require('bcrypt');
 const { User } = require('../database/models');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -51,7 +54,7 @@ passport.use('local-signin', new LocalStrategy({
 
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secretcode';
+opts.secretOrKey = process.env.SECRET;
 passport.use('jwt', new JwtStrategy(opts, async function (jwt_payload, done) {
     const user = await userService.getUserByEmail(jwt_payload.email)
 
