@@ -5,6 +5,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const userService = require('../services/user.js');
 const bcrypt = require('bcrypt');
 const { User } = require('../database/models');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
