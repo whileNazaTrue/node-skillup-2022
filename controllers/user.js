@@ -3,8 +3,11 @@ const userService = require('../services/user.js');
 
 const getUsers = async (req, res) => {
     try {
-        const { page } = req.query;
+        if (req.query.page === undefined) {
+            req.query.page = 0;
+        }
 
+        const { page } = req.query;
         const {count, rows, flag, previous, next} = await userService.getUsers(page);
         if (flag) {
             res.status(200).json({

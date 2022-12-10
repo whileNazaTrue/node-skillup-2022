@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const encode = (payload) => {
-    return 'Bearer ' + jwt.sign(payload, "secretcode", { expiresIn: "24h" });
+    return 'Bearer ' + jwt.sign(payload, process.env.SECRET, { expiresIn: "24h" });
 };
 
 const decode = (req, res, next) => {
@@ -49,7 +49,7 @@ const verify = (token) => {
     if(!token) return new Error()
 
     const modToken = token.split(' ')[1]
-    return jwt.verify(modToken, "secretcode", (err, payload) => {
+    return jwt.verify(modToken, process.env.SECRET, (err, payload) => {
         //if there is not token or does not match
         if (err) return new Error();
 

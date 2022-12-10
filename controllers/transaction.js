@@ -2,6 +2,10 @@ const transactionService = require('../services/transaction.js');
 
 const getTransactions = async (req, res) => {
     try {
+        if (req.query.page === undefined) {
+            req.query.page = 0;
+        }
+        
         const { page } = req.query;
         const {count, rows, flag, previous, next} = await transactionService.getTransactions(page);
 

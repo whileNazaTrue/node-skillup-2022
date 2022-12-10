@@ -19,7 +19,7 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(session({
-    secret: 'secretcode',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }))
