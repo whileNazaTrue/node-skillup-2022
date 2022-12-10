@@ -58,3 +58,68 @@ El mismo es una extensión de el objecto Error nativo de JS. Sirve para devolver
 
 
 
+# Cuentas y contraseñas para testear
+
+## Administradores:
+
+      email: 'johndoe@gmail.com',
+      password: 1234
+     
+      email: 'janedoe@gmail.com',
+      password: 1234,
+
+      email: 'johnsmith@gmail.com',
+      
+      email: 'janesmith@gmail.com',
+      password: 1234,
+    
+      email: 'marianogonzalez@gmail.com',
+      password: 1234,
+
+      email: 'mariagonzalez@gmail.com',
+      password: 1234,
+     
+      email: 'pedroramirez@gmail.com',
+      password: 1234,
+   
+      email: 'pabloramirez@gmail.com',
+      password: 1234,
+   
+      email: 'juanperez@gmail.com',
+      password: 1234,
+    
+      email: 'joseperez@gmail.com',
+      password: 1234,
+    
+## Usuarios:
+
+      email: 'carlosgarcia@gmail.com',
+      password: 4321,
+
+      email: 'carlagarcia@gmail.com',
+      password: 4321,
+
+      email: 'luisgonzalez@gmail.com',
+      password: 4321,
+
+      email: 'luisagonzalez@gmail.com',
+      password: 4321,
+
+      email: 'miguelgonzalez@gmail.com',
+      password: 4321,
+
+      email: 'miguelinagonzalez@gmail.com',
+      password: 4321,
+
+      email: 'paulorivero@gmail.com',
+      password: 4321,
+
+      email: 'paularivero@gmail.com',
+      password: 4321,
+
+      lastName: 'Rivero',
+      email: 'martarivero@gmail.com',
+      password: 4321,
+
+      email: 'martinrivero@gmail.com',
+      password: 4321,
