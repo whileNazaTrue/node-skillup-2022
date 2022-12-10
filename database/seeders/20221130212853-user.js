@@ -7,7 +7,7 @@ module.exports = {
       lastName: 'Doe',
       email: 'johndoe@gmail.com',
       password: '123456',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -17,7 +17,7 @@ module.exports = {
       lastName: 'Doe',
       email: 'janedoe@gmail.com',
       password: '654321',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -27,7 +27,7 @@ module.exports = {
       lastName: 'Smith',
       email: 'johnsmith@gmail.com',
       password: '123',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -37,7 +37,7 @@ module.exports = {
       lastName: 'Smith',
       email: 'janesmith@gmail.com',
       password: '321',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -47,7 +47,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'marianogonzalez@gmail.com',
       password: '123456',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -57,7 +57,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'mariagonzalez@gmail.com',
       password: '654321',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -67,7 +67,7 @@ module.exports = {
       lastName: 'Ramirez',
       email: 'pedroramirez@gmail.com',
       password: '1234',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -77,7 +77,7 @@ module.exports = {
       lastName: 'Ramirez',
       email: 'pabloramirez@gmail.com',
       password: '4321',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -87,7 +87,7 @@ module.exports = {
       lastName: 'Perez',
       email: 'juanperez@gmail.com',
       password: '12345',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -97,7 +97,7 @@ module.exports = {
       lastName: 'Perez',
       email: 'joseperez@gmail.com',
       password: '54321',
-      avatar: null,
+      avatarId: null,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -107,7 +107,7 @@ module.exports = {
       lastName: 'Garcia',
       email: 'carlosgarcia@gmail.com',
       password: '123456',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -117,7 +117,7 @@ module.exports = {
       lastName: 'Garcia',
       email: 'carlagarcia@gmail.com',
       password: '654321',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -127,7 +127,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'luisgonzalez@gmail.com',
       password: '123',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -137,7 +137,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'luisagonzalez@gmail.com',
       password: '321',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -147,7 +147,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'miguelgonzalez@gmail.com',
       password: '123456',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -157,7 +157,7 @@ module.exports = {
       lastName: 'Gonzalez',
       email: 'miguelinagonzalez@gmail.com',
       password: '654321',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -167,7 +167,7 @@ module.exports = {
       lastName: 'Rivero',
       email: 'paulorivero@gmail.com',
       password: '1234',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -177,7 +177,7 @@ module.exports = {
       lastName: 'Rivero',
       email: 'paularivero@gmail.com',
       password: '4321',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -187,7 +187,7 @@ module.exports = {
       lastName: 'Rivero',
       email: 'martarivero@gmail.com',
       password: '12345',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -197,7 +197,7 @@ module.exports = {
       lastName: 'Rivero',
       email: 'martinrivero@gmail.com',
       password: '54321',
-      avatar: null,
+      avatarId: null,
       roleId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
