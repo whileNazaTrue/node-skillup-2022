@@ -51,7 +51,7 @@ passport.use('local-signin', new LocalStrategy({
 
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secretcode';
+opts.secretOrKey = process.env.SECRET;
 passport.use('jwt', new JwtStrategy(opts, async function (jwt_payload, done) {
     const user = await userService.getUserByEmail(jwt_payload.email)
 
