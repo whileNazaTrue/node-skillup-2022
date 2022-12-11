@@ -17,15 +17,15 @@ router
  * @swagger
  * components:
  *   schemas:
- *     Categorie:
+ *     Category:
  *       type: object
  *       properties:
  *         name:
  *           type: string
- *           description: Name of categorie.
+ *           description: Name of category.
  *         description:
  *           type: string
- *           description: Description of categorie.
+ *           description: Description of category.
  *       required:
  *         - name
  *         - description
@@ -51,14 +51,14 @@ router
  *            schema:
  *              type: array
  *              items:    
- *                $ref: '#/components/schemas/Categorie'
+ *                $ref: '#/components/schemas/Category'
  * 
 */
 /**
  * @swagger
  * /api/categories:
  *  post:
- *    summary: Create new categorie.
+ *    summary: Create new category.
  *    tags: [Categories]
  *    requestBody: 
  *      required: true
@@ -66,10 +66,10 @@ router
  *        application/json:
  *          schema:
  *            type: object   
- *            $ref: '#/components/schemas/Categorie'
+ *            $ref: '#/components/schemas/Category'
  *    responses:
  *      200:
- *        description: Categorie created.
+ *        description: Category created.
  *      401:
  *        description: Error.
  *
@@ -79,7 +79,7 @@ router
  * @swagger
  * /api/categories/{id}:
  *  get:
- *    summary: Get categorie by ID.
+ *    summary: Get category by ID.
  *    tags: [Categories]
  *    parameters:
  *      - in: path
@@ -87,7 +87,7 @@ router
  *        schema:
  *        type: integer
  *        required: true
- *        description: ID of the categorie.
+ *        description: ID of the category.
  *    responses:
  *      200:
  *        description: All categories.
@@ -98,7 +98,7 @@ router
  *            schema:
  *              type: object
  *              items:    
- *                $ref: '#/components/schemas/Categorie'
+ *                $ref: '#/components/schemas/Category'
  * 
  */
 
@@ -106,7 +106,7 @@ router
  * @swagger
  * /api/categories/{id}:
  *  put:
- *    summary: Update categorie.
+ *    summary: Update category.
  *    tags: [Categories]
  *    parameters:
  *      - in: path
@@ -114,17 +114,17 @@ router
  *        schema:
  *        type: integer
  *        required: true
- *        description: ID of the categorie.
+ *        description: ID of the category.
  *    requestBody: 
  *      required: true
  *      content:
  *        application/json:
  *          schema:
  *            type: object   
- *            $ref: '#/components/schemas/Categorie'
+ *            $ref: '#/components/schemas/Category'
  *    responses:
  *      200:
- *        description: Categorie updated.
+ *        description: Category updated.
  *      401:
  *        description: Error.
  */
@@ -133,7 +133,7 @@ router
  * @swagger
  * /api/categories/{id}:
  *  delete:
- *    summary: Delete categorie.
+ *    summary: Delete Category.
  *    tags: [Categories]
  *    parameters:
  *      - in: path
@@ -141,10 +141,10 @@ router
  *        schema:
  *        type: integer
  *        required: true
- *        description: ID of the categorie.
+ *        description: ID of the category.
  *    responses:
  *      200:
- *        description: Categorie deleted.
+ *        description: Category deleted.
  *      401:
  *        description: Error.
  */
