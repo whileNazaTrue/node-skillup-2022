@@ -6,6 +6,8 @@ const logger = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
 const cors = require('cors')
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 require('dotenv').config()
 
 const indexRouter = require('./routes/index')
@@ -28,6 +30,38 @@ app.use(passport.session())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+//Swagger config
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.3", 
+    info: {
+      title: "Wallet API",
+      version: "0.1",
+      description: "Alkemy Skill Up project",
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
+  },
+  apis: [
+    "./routes/*.js",
+  ],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.use('/api', require('./routes'));
 
